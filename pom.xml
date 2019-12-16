@@ -6,14 +6,13 @@
   <packaging>pom</packaging>
   <name>Application LIfecycle ENabler parent project.</name>
   <description>Application LIfecycle ENabler is an application that allows you to manage your application's lifecycle on a cloud environment.</description>
+
+  
   <modules>
     <module>alien4cloud-common</module>
     <module>alien4cloud-security</module>
     <module>alien4cloud-core</module>
-    <module>alien4cloud-mock-paas-provider-plugin</module>
-    <module>alien4cloud-rest-api</module>
-    <module>alien4cloud-rest-it</module>
-    <module>alien4cloud-ui</module>
+    <!-- note other modules are skipped unless "non-cloudsoft" profile is activated -->
   </modules>
 
   <properties>
@@ -690,6 +689,15 @@
       <properties>
         <jacocoargline />
       </properties>
+    </profile>
+    <profile>
+      <id>non-cloudsoft</id>
+      <modules>
+        <module>alien4cloud-mock-paas-provider-plugin</module>
+        <module>alien4cloud-rest-api</module>
+        <module>alien4cloud-rest-it</module>
+        <module>alien4cloud-ui</module>
+      </modules>
     </profile>
   </profiles>
 </project>
