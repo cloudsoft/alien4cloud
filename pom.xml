@@ -475,6 +475,7 @@
   </dependencyManagement>
 
   <repositories>
+<!--
     <repository>
       <id>repo.opensource.fastconnect.org</id>
       <url>http://fastconnect.org/maven/content/repositories/opensource</url>
@@ -483,6 +484,29 @@
       <id>repo.opensource.snapshot.fastconnect.org</id>
       <url>http://fastconnect.org/maven/content/repositories/opensource-snapshot</url>
     </repository>
+-->
+<!--
+        <repository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+-->
+        <repository>
+            <id>cloudsoft-releases</id>
+            <url>https://artifactory.cloudsoftcorp.com/artifactory/libs-release-local/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     <repository>
       <id>projectlombok.org</id>
       <name>Lombok Repository</name>
