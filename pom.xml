@@ -10,10 +10,12 @@
     <module>alien4cloud-common</module>
     <module>alien4cloud-security</module>
     <module>alien4cloud-core</module>
+<!-- skip ones we don't need
     <module>alien4cloud-mock-paas-provider-plugin</module>
     <module>alien4cloud-rest-api</module>
     <module>alien4cloud-rest-it</module>
     <module>alien4cloud-ui</module>
+-->
   </modules>
 
   <properties>
