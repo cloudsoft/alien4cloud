@@ -424,9 +424,10 @@ public class TopologyServiceCore {
     private static DeploymentArtifact mergeDeploymentArtifact(DeploymentArtifact o1, DeploymentArtifact o2) {
         DeploymentArtifact result = new DeploymentArtifact();
         
+        // node archive name and version are not read from YAML - just set the outermost bundle,
+        // then rely on reading to traverse all bundles
         setFirstNonNull(result, DeploymentArtifact::setArchiveName, DeploymentArtifact::getArchiveName, o1, o2);
         if (result.getArchiveName()==null && currentArchive.get()!=null) result.setArchiveName(currentArchive.get().getName());
-        
         setFirstNonNull(result, DeploymentArtifact::setArchiveVersion, DeploymentArtifact::getArchiveVersion, o1, o2);
         if (result.getArchiveVersion()==null && currentArchive.get()!=null) result.setArchiveVersion(currentArchive.get().getVersion());
         
