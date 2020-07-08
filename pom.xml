@@ -6,16 +6,13 @@
   <packaging>pom</packaging>
   <name>Application LIfecycle ENabler parent project.</name>
   <description>Application LIfecycle ENabler is an application that allows you to manage your application's lifecycle on a cloud environment.</description>
+
+  
   <modules>
     <module>alien4cloud-common</module>
     <module>alien4cloud-security</module>
     <module>alien4cloud-core</module>
-<!-- skip ones we don't need
-    <module>alien4cloud-mock-paas-provider-plugin</module>
-    <module>alien4cloud-rest-api</module>
-    <module>alien4cloud-rest-it</module>
-    <module>alien4cloud-ui</module>
--->
+    <!-- note other modules are skipped unless "non-cloudsoft" profile is activated -->
   </modules>
 
   <properties>
@@ -478,6 +475,7 @@
   </dependencyManagement>
 
   <repositories>
+<!--
     <repository>
       <id>repo.opensource.fastconnect.org</id>
       <url>http://fastconnect.org/maven/content/repositories/opensource</url>
@@ -486,6 +484,29 @@
       <id>repo.opensource.snapshot.fastconnect.org</id>
       <url>http://fastconnect.org/maven/content/repositories/opensource-snapshot</url>
     </repository>
+-->
+<!--
+        <repository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+-->
+        <repository>
+            <id>cloudsoft-releases</id>
+            <url>https://artifactory.cloudsoftcorp.com/artifactory/libs-release-local/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     <repository>
       <id>projectlombok.org</id>
       <name>Lombok Repository</name>
@@ -532,6 +553,12 @@
           <target>${java.version}</target>
         </configuration>
       </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>  <!-- else defaults to 2.7 which doesn't support altRepo -->
+                </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -686,6 +713,15 @@
       <properties>
         <jacocoargline />
       </properties>
+    </profile>
+    <profile>
+      <id>non-cloudsoft</id>
+      <modules>
+        <module>alien4cloud-mock-paas-provider-plugin</module>
+        <module>alien4cloud-rest-api</module>
+        <module>alien4cloud-rest-it</module>
+        <module>alien4cloud-ui</module>
+      </modules>
     </profile>
   </profiles>
 </project>
