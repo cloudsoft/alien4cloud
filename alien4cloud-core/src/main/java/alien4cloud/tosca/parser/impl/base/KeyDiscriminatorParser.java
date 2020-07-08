@@ -7,15 +7,16 @@ import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.ScalarNode;
+import org.yaml.snakeyaml.nodes.SequenceNode;
+
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import alien4cloud.tosca.parser.INodeParser;
 import alien4cloud.tosca.parser.ParsingContextExecution;
 import alien4cloud.tosca.parser.ParsingError;
 import alien4cloud.tosca.parser.impl.ErrorCode;
 import alien4cloud.tosca.parser.mapping.DefaultParser;
-
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 /**
  * Map using a child parser based on a discriminator key (valid only for MappingNode).
@@ -44,27 +45,30 @@ public class KeyDiscriminatorParser<T> extends DefaultParser<T> {
     @Override
     public T parse(Node node, ParsingContextExecution context) {
         Set<String> keySet = Sets.newHashSet();
+        INodeParser<T> complexNodeFallbackParser = null;
         if (node instanceof MappingNode) {
             // create a set of available keys
             MappingNode mappingNode = (MappingNode) node;
             for (NodeTuple tuple : mappingNode.getValue()) {
                 keySet.add(((ScalarNode) tuple.getKeyNode()).getValue());
             }
-            INodeParser<T> mappingNodeFallbackParser = null;
             // check if one of the discriminator key exists and if so use it for parsing.
             for (Map.Entry<String, INodeParser<T>> entry : parserByExistKey.entrySet()) {
                 if (keySet.contains(entry.getKey())) {
                     return entry.getValue().parse(node, context);
                 } else if (MAPPING_NODE_FALLBACK_KEY.equals(entry.getKey())) {
-                    mappingNodeFallbackParser = entry.getValue();
+                    complexNodeFallbackParser = entry.getValue();
                 }
             }
-
-            // if not we should use the mapping node fallback parser.
-            if (mappingNodeFallbackParser != null) {
-                return mappingNodeFallbackParser.parse(node, context);
-            }
+        } else if (node instanceof SequenceNode) {
+            complexNodeFallbackParser = parserByExistKey.get(MAPPING_NODE_FALLBACK_KEY);
         }
+        
+        // if either the above set this, we should use it
+        if (complexNodeFallbackParser != null) {
+            return complexNodeFallbackParser.parse(node, context);
+        }
+        
         if (fallbackParser != null) {
             return fallbackParser.parse(node, context);
         } else {

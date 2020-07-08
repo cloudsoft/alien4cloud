@@ -3,18 +3,22 @@ package alien4cloud.paas.function;
 import java.util.List;
 import java.util.Map;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.apache.commons.lang3.StringUtils;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import alien4cloud.common.AlienConstants;
 import alien4cloud.model.components.AbstractPropertyValue;
 import alien4cloud.model.components.AttributeDefinition;
+import alien4cloud.model.components.ComplexPropertyValue;
 import alien4cloud.model.components.ConcatPropertyValue;
 import alien4cloud.model.components.FunctionPropertyValue;
 import alien4cloud.model.components.IValue;
 import alien4cloud.model.components.IndexedInheritableToscaElement;
 import alien4cloud.model.components.IndexedToscaElement;
+import alien4cloud.model.components.ListPropertyValue;
 import alien4cloud.model.components.PropertyDefinition;
 import alien4cloud.model.components.ScalarPropertyValue;
 import alien4cloud.model.topology.Capability;
@@ -34,10 +38,7 @@ import alien4cloud.tosca.normative.ToscaType;
 import alien4cloud.utils.AlienUtils;
 import alien4cloud.utils.MapUtil;
 import alien4cloud.utils.PropertyUtil;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Utility class to process functions defined in attributes level:
@@ -288,8 +289,8 @@ public final class FunctionEvaluator {
         List<? extends IPaaSTemplate> paaSTemplates = getPaaSTemplatesFromKeyword(basePaaSTemplate, functionParam.getTemplateName(), builtPaaSTemplates);
         for (IPaaSTemplate paaSTemplate : paaSTemplates) {
             String propertyValue = getPropertyFromTemplateOrCapability(paaSTemplate, functionParam.getCapabilityOrRequirementName(),
-                    functionParam.getElementNameToFetch());
-            // return the first value found
+                    functionParam.getElementNameToFetch());  // TODO check "property.keyOrIndex" matches spec (which I thought allowed multiple arguments eg "property, keyOrIndex")
+            // return the first matching value found in pass templates
             if (propertyValue != null) {
                 return propertyValue;
             }
@@ -312,18 +313,29 @@ public final class FunctionEvaluator {
             } else {
                 // Complex
                 PropertyDefinition propertyDefinition = propertyDefinitions.get(propertyAccessPath);
-                if (ToscaType.isSimple(propertyDefinition.getType())) {
+                if (propertyDefinition!=null && ToscaType.isSimple(propertyDefinition.getType())) {
                     // It's a complex path (with '.') but the type in definition is finally simple
                     return null;
                 } else if (properties != null) {
-                    Object value = MapUtil.get(properties.get(propertyName), propertyAccessPath.substring(propertyName.length()));
+                    AbstractPropertyValue pv = properties.get(propertyName);
+                    Object valueHolder;
+                    if (pv instanceof ListPropertyValue) {
+                        valueHolder = ((ListPropertyValue)pv).getValue();
+                    } else if (pv instanceof ComplexPropertyValue) {
+                        valueHolder = ((ComplexPropertyValue)pv).getValue();
+                    } else {
+                        throw new IllegalStateException("Value at property "+propertyName+" is not list/map so not applicable for "+propertyAccessPath);
+                    }
+                    Object value = MapUtil.get(valueHolder, propertyAccessPath.substring(propertyName.length()+1));
                     if (value instanceof String) {
                         return (String) value;
+                    } else if (value==null) {
+                        throw new IllegalStateException("No value found for "+propertyAccessPath);
                     } else {
                         try {
                             return JsonUtil.toString(value);
                         } catch (JsonProcessingException e) {
-                            return null;
+                            throw new IllegalStateException("Illegal value found for "+propertyAccessPath+": "+value);
                         }
                     }
                 } else {
@@ -371,6 +383,10 @@ public final class FunctionEvaluator {
                         && requirements.get(capabilityOrRequirementName).getProperties() != null) {
                     propertyValue = requirements.get(capabilityOrRequirementName).getProperties().get(elementName);
                 }
+            }
+            
+            if (propertyValue == null) {
+                throw new IllegalStateException("Unknown capability/requirement property "+capabilityOrRequirementName+" / "+elementName);
             }
 
             return getScalarValue(propertyValue);
