@@ -1,6 +1,5 @@
 package alien4cloud.paas.exception;
 
-import alien4cloud.exception.FunctionalException;
 import alien4cloud.exception.TechnicalException;
 
 /**

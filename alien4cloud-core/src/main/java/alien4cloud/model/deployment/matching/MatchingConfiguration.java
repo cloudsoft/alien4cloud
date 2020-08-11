@@ -1,13 +1,10 @@
 package alien4cloud.model.deployment.matching;
 
-import java.util.List;
-import java.util.Map;
-
-import alien4cloud.exception.IndexingServiceException;
 import lombok.Getter;
 import lombok.Setter;
-import org.elasticsearch.annotation.ESObject;
-import org.elasticsearch.annotation.Id;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Matching configuration is associated to types provided by a plugin so alien knows how things should be matched.

@@ -15,9 +15,9 @@ import com.google.common.io.Closeables;
 @AllArgsConstructor
 public class ZipDirWalker extends SimpleFileVisitor<Path> {
 
-    private Path inputPath;
+    private final Path inputPath;
 
-    private ZipOutputStream zipOutputStream;
+    private final ZipOutputStream zipOutputStream;
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {

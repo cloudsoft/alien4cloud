@@ -22,7 +22,7 @@ public final class TypeScanner {
         scanner.addIncludeFilter(filter);
         Set<BeanDefinition> beanSet = scanner.findCandidateComponents(basePackage);
 
-        Set<Class<?>> classSet = new HashSet<Class<?>>();
+        Set<Class<?>> classSet = new HashSet<>();
         for (BeanDefinition beanDef : beanSet) {
             log.debug("found candidate bean = {}", beanDef.getBeanClassName());
 

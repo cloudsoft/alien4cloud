@@ -1,24 +1,20 @@
 package alien4cloud.model.topology;
 
-import java.util.Map;
-
-import alien4cloud.model.components.DeploymentArtifact;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import alien4cloud.json.deserializer.PropertyValueDeserializer;
 import alien4cloud.model.components.AbstractPropertyValue;
+import alien4cloud.model.components.DeploymentArtifact;
 import alien4cloud.utils.jackson.ConditionalAttributes;
 import alien4cloud.utils.jackson.ConditionalOnAttribute;
 import alien4cloud.utils.jackson.JSonMapEntryArrayDeSerializer;
 import alien4cloud.utils.jackson.JSonMapEntryArraySerializer;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.elasticsearch.annotation.StringField;
-import org.elasticsearch.annotation.query.TermFilter;
-import org.elasticsearch.mapping.IndexType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.Map;
 
 /**
  * Abstract template is parent of {@link NodeTemplate} and {@link RelationshipTemplate}.

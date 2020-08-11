@@ -1,10 +1,8 @@
 package alien4cloud.security.spring;
 
-import java.util.List;
-import java.util.Set;
-
+import alien4cloud.security.model.User;
+import alien4cloud.security.users.IAlienUserDao;
 import lombok.extern.slf4j.Slf4j;
-
 import org.elasticsearch.common.collect.Lists;
 import org.elasticsearch.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +11,10 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionKey;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.github.api.GitHub;
-import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.util.MultiValueMap;
 
-import alien4cloud.security.model.User;
-import alien4cloud.security.users.IAlienUserDao;
+import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Profile("github-auth")

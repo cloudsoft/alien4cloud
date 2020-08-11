@@ -1,12 +1,11 @@
 package alien4cloud.model.components.constraints;
 
-import javax.validation.constraints.NotNull;
-
-import alien4cloud.tosca.properties.constraints.exception.ConstraintValueDoNotMatchPropertyTypeException;
+import alien4cloud.tosca.properties.constraints.exception.ConstraintViolationException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import alien4cloud.tosca.properties.constraints.exception.ConstraintViolationException;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter

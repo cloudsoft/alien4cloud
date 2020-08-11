@@ -1,30 +1,25 @@
 package alien4cloud.tosca;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.inject.Inject;
-
 import alien4cloud.component.ICSARRepositorySearchService;
-import alien4cloud.model.components.CSARDependency;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import org.springframework.stereotype.Component;
-
 import alien4cloud.component.repository.ICsarRepositry;
 import alien4cloud.component.repository.exception.CSARVersionAlreadyExistsException;
+import alien4cloud.model.components.CSARDependency;
 import alien4cloud.model.components.Csar;
+import alien4cloud.model.git.CsarDependenciesBean;
 import alien4cloud.paas.wf.WorkflowsBuilderService;
 import alien4cloud.security.AuthorizationUtil;
-import alien4cloud.model.git.CsarDependenciesBean;
 import alien4cloud.security.model.Role;
 import alien4cloud.topology.TopologyServiceCore;
 import alien4cloud.topology.TopologyTemplateVersionService;
 import alien4cloud.tosca.model.ArchiveRoot;
 import alien4cloud.tosca.parser.*;
+import com.google.common.collect.Maps;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
+import java.nio.file.Path;
+import java.util.Map;
+import java.util.Set;
 
 @Component
 public class ArchiveUploadService {

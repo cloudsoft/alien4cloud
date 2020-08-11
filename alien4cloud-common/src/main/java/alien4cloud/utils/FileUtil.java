@@ -43,24 +43,18 @@ public final class FileUtil {
 
     static void putZipEntry(ZipOutputStream zipOutputStream, ZipEntry zipEntry, Path file) throws IOException {
         zipOutputStream.putNextEntry(zipEntry);
-        InputStream input = new BufferedInputStream(Files.newInputStream(file));
-        try {
+        try (InputStream input = new BufferedInputStream(Files.newInputStream(file))) {
             ByteStreams.copy(input, zipOutputStream);
             zipOutputStream.closeEntry();
-        } finally {
-            input.close();
         }
     }
 
     static void putTarEntry(TarArchiveOutputStream tarOutputStream, TarArchiveEntry tarEntry, Path file) throws IOException {
         tarEntry.setSize(Files.size(file));
         tarOutputStream.putArchiveEntry(tarEntry);
-        InputStream input = new BufferedInputStream(Files.newInputStream(file));
-        try {
+        try ( InputStream input = new BufferedInputStream(Files.newInputStream(file))) {
             ByteStreams.copy(input, tarOutputStream);
             tarOutputStream.closeArchiveEntry();
-        } finally {
-            input.close();
         }
     }
 
@@ -85,16 +79,13 @@ public final class FileUtil {
             throw new FileNotFoundException("File not found " + inputPath);
         }
         touch(outputPath);
-        ZipOutputStream zipOutputStream = new ZipOutputStream(new BufferedOutputStream(Files.newOutputStream(outputPath)));
-        try {
+          try (ZipOutputStream zipOutputStream = new ZipOutputStream(new BufferedOutputStream(Files.newOutputStream(outputPath)))){
             if (!Files.isDirectory(inputPath)) {
                 putZipEntry(zipOutputStream, new ZipEntry(inputPath.getFileName().toString()), inputPath);
             } else {
                 Files.walkFileTree(inputPath, new ZipDirWalker(inputPath, zipOutputStream));
             }
             zipOutputStream.flush();
-        } finally {
-            Closeables.close(zipOutputStream, true);
         }
     }
 

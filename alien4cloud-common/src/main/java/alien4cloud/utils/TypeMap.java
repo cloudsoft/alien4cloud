@@ -11,7 +11,7 @@ public class TypeMap {
     private Map<String, Object> getMap(Class<?> clazz) {
         Map<String, Object> map = cacheMap.get(clazz);
         if (map == null) {
-            cacheMap.put(clazz, new HashMap<String, Object>());
+            cacheMap.put(clazz, new HashMap<>());
         }
         return cacheMap.get(clazz);
     }

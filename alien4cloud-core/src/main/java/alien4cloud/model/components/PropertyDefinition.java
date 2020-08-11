@@ -1,15 +1,5 @@
 package alien4cloud.model.components;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import lombok.*;
-
-import org.hibernate.validator.constraints.NotBlank;
-
 import alien4cloud.json.deserializer.PropertyConstraintDeserializer;
 import alien4cloud.model.components.constraints.*;
 import alien4cloud.tosca.container.validation.*;
@@ -17,10 +7,15 @@ import alien4cloud.ui.form.annotation.FormContentTypes;
 import alien4cloud.ui.form.annotation.FormProperties;
 import alien4cloud.ui.form.annotation.FormType;
 import alien4cloud.ui.form.annotation.FormValidValues;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

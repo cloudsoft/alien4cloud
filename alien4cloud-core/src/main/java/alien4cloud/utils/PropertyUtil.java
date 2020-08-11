@@ -1,21 +1,13 @@
 package alien4cloud.utils;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.collections4.MapUtils;
-
-import alien4cloud.exception.InvalidArgumentException;
 import alien4cloud.model.components.AbstractPropertyValue;
-import alien4cloud.model.components.ComplexPropertyValue;
-import alien4cloud.model.components.ListPropertyValue;
 import alien4cloud.model.components.PropertyDefinition;
 import alien4cloud.model.components.ScalarPropertyValue;
-import alien4cloud.model.topology.Capability;
-import alien4cloud.model.topology.NodeTemplate;
-
 import com.google.common.collect.Maps;
+import org.apache.commons.collections4.MapUtils;
+
+import java.util.Map;
+import java.util.Set;
 
 public final class PropertyUtil {
     private PropertyUtil() {

@@ -1,18 +1,12 @@
 package alien4cloud.common;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.elasticsearch.common.collect.Maps;
-import org.springframework.stereotype.Service;
-
 import alien4cloud.dao.IGenericSearchDAO;
 import alien4cloud.model.common.ITaggableResource;
 import alien4cloud.model.common.Tag;
-
 import com.google.common.collect.Lists;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * Service that manages tags for taggable resources.

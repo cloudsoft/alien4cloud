@@ -90,8 +90,8 @@ public final class ImageResizeUtil {
         int targetWidth = width;
         int targetHeight = height;
 
-        float targetDimensions = Float.valueOf(width).floatValue() / Float.valueOf(height).floatValue();
-        float sourceDimensions = Float.valueOf(originalWidth).floatValue() / Float.valueOf(originalHeight).floatValue();
+        float targetDimensions = (float) width / (float) height;
+        float sourceDimensions = (float) originalWidth / (float) originalHeight;
         if (targetDimensions > sourceDimensions) {
             targetWidth = Float.valueOf(width * sourceDimensions / targetDimensions).intValue();
         } else {

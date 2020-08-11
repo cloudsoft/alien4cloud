@@ -1,29 +1,24 @@
 package alien4cloud.component.repository;
 
-import static org.junit.Assert.*;
+import alien4cloud.component.repository.exception.CSARStorageFailureException;
+import alien4cloud.component.repository.exception.CSARVersionAlreadyExistsException;
+import alien4cloud.component.repository.exception.CSARVersionNotFoundException;
+import alien4cloud.utils.FileUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import javax.annotation.Resource;
-
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import alien4cloud.component.repository.CsarFileRepository;
-import alien4cloud.component.repository.ICsarRepositry;
-import alien4cloud.component.repository.exception.CSARStorageFailureException;
-import alien4cloud.component.repository.exception.CSARVersionAlreadyExistsException;
-import alien4cloud.component.repository.exception.CSARVersionNotFoundException;
-import alien4cloud.utils.FileUtil;
+import static org.junit.Assert.*;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)

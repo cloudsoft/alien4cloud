@@ -1,38 +1,22 @@
 package alien4cloud.tosca.parser.mapping.generator;
 
-import java.io.IOException;
-import java.util.AbstractMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-
-import com.google.common.collect.Lists;
-import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
-import org.yaml.snakeyaml.error.Mark;
-import org.yaml.snakeyaml.nodes.*;
-
-import alien4cloud.tosca.parser.IChecker;
-import alien4cloud.tosca.parser.INodeParser;
-import alien4cloud.tosca.parser.KeyValueMappingTarget;
-import alien4cloud.tosca.parser.MappingTarget;
-import alien4cloud.tosca.parser.ParserUtils;
-import alien4cloud.tosca.parser.ParsingContextExecution;
-import alien4cloud.tosca.parser.ParsingError;
-import alien4cloud.tosca.parser.ParsingException;
-import alien4cloud.tosca.parser.ParsingResult;
-import alien4cloud.tosca.parser.YamlSimpleParser;
+import alien4cloud.tosca.parser.*;
 import alien4cloud.tosca.parser.impl.ErrorCode;
 import alien4cloud.tosca.parser.impl.base.CheckedTypeNodeParser;
 import alien4cloud.tosca.parser.impl.base.ScalarParser;
 import alien4cloud.tosca.parser.impl.base.TypeNodeParser;
 import alien4cloud.tosca.parser.mapping.DefaultParser;
-
 import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import org.yaml.snakeyaml.nodes.*;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.AbstractMap;
+import java.util.Map;
 
 /**
  * Load type mapping definition from yaml and add it to the type mapping registry.

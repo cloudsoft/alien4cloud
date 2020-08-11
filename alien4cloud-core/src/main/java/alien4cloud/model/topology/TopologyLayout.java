@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.geo.Point;
 
-import java.awt.geom.Point2D;
 import java.util.Map;
 
 /**

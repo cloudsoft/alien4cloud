@@ -1,18 +1,14 @@
 package alien4cloud.model.orchestrators.locations;
 
-import java.util.List;
-import java.util.Map;
-
 import alien4cloud.orchestrators.locations.services.LocationResourceTypes;
 import com.google.common.collect.Lists;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import alien4cloud.model.components.IndexedCapabilityType;
-import alien4cloud.model.components.IndexedNodeType;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.util.List;
 
 @Getter
 @Setter

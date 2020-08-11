@@ -1,13 +1,12 @@
 package alien4cloud.topology.task;
 
-import java.util.List;
-import java.util.Map;
-
-import alien4cloud.tosca.properties.constraints.ConstraintUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter

@@ -1,22 +1,6 @@
 package alien4cloud.orchestrators.services;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
-import javax.annotation.Resource;
-import javax.inject.Inject;
-
-import lombok.extern.slf4j.Slf4j;
-
-import org.elasticsearch.mapping.QueryHelper;
-import org.springframework.stereotype.Component;
-
 import alien4cloud.component.repository.exception.CSARVersionAlreadyExistsException;
-import alien4cloud.csar.services.CsarService;
 import alien4cloud.dao.IGenericSearchDAO;
 import alien4cloud.dao.model.GetMultipleDataResult;
 import alien4cloud.deployment.DeploymentService;
@@ -35,8 +19,19 @@ import alien4cloud.paas.exception.PluginConfigurationException;
 import alien4cloud.tosca.ArchiveIndexer;
 import alien4cloud.tosca.parser.ParsingError;
 import alien4cloud.utils.MapUtil;
-
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.mapping.QueryHelper;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import javax.inject.Inject;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Service to manage state of an orchestrator

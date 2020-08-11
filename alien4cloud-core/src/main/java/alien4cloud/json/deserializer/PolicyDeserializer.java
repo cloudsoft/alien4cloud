@@ -1,18 +1,16 @@
 package alien4cloud.json.deserializer;
 
-import java.io.IOException;
-import java.util.Map;
-
+import alien4cloud.model.topology.AbstractPolicy;
+import alien4cloud.model.topology.GenericPolicy;
+import alien4cloud.model.topology.HaPolicy;
+import alien4cloud.model.topology.LocationPlacementPolicy;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import alien4cloud.model.topology.AbstractPolicy;
-import alien4cloud.model.topology.GenericPolicy;
-import alien4cloud.model.topology.HaPolicy;
-import alien4cloud.model.topology.LocationPlacementPolicy;
+import java.util.Map;
 
 /**
  * Custom deserializer to handle multiple AbstractPolicy types.

@@ -6,13 +6,10 @@ import java.util.Map;
 import alien4cloud.utils.MapUtil;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import alien4cloud.exception.InvalidArgumentException;
 import alien4cloud.model.components.PropertyDefinition;
 import alien4cloud.tosca.normative.*;
+import org.apache.commons.lang.NotImplementedException;
 
 @Slf4j
 public class PropertyValueService {
